@@ -186,6 +186,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 60,
         height: 42,
+    },
+    containerHome: {
+        flex: 1,
+        backgroundColor: '#1A1717',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        paddingHorizontal: 20,
     }
 });
 
