@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         backgroundColor: 'black',
         color: '#fff',
-        paddingStart: 8
+        paddingStart: 8,
     },
     inputCadastro: {
         fontSize: 24,
@@ -166,6 +166,26 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: '#21C25F',
         fontWeight: 'bold'
+    },
+    inputArea: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: 'black',
+        borderRadius: 15,
+        width: '100%',
+        justifyContent: 'center'
+    },
+    icon: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 60,
+        height: 60,
+    },
+    icon2: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 60,
+        height: 42,
     }
 });
 

@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, Pressable, TextInput } from 'react-native';
+import { View, Text, Pressable, TextInput, Image } from 'react-native';
 import styles from '../../../styles/styles';
 import { useState } from 'react';
 import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
@@ -9,6 +9,9 @@ export default function Login({navigation}) {
     useFonts({
         Inter_400Regular,
       });
+    
+    const [input, setInput] = useState('');
+    const [hidePass, setHidePass] = useState(true);
 
   return (
     <View style={styles.container}>
@@ -19,7 +22,22 @@ export default function Login({navigation}) {
         <View style={styles.divLogin}>
             <View style={styles.primeiraParteLogin}>
                 <TextInput style={styles.inputLogin} placeholder='E-mail' placeholderTextColor={'#fff'}/>
-                <TextInput style={styles.inputLogin} placeholder='Senha' placeholderTextColor={'#fff'}/>
+                <View style={styles.inputArea}>
+                    <TextInput style={styles.inputLogin} placeholder='Senha' placeholderTextColor={'#fff'} value={input} onChangeText={(texto) => setInput(texto)} secureTextEntry={hidePass}/>
+                    <Pressable style={styles.icon} onPress={() => setHidePass(!hidePass)}>
+                        {hidePass ?
+                            <Image source={require('../../../assets/images/icons/visivel.png')}
+                            resizeMode='cover'
+                            style={{height: 42, width: 42}}
+                            />
+                            :
+                            <Image source={require('../../../assets/images/icons/invisivel.png')}
+                            resizeMode='cover'
+                            style={{height: 42, width: 42}}
+                            />      
+                        }
+                    </Pressable>
+                </View>
             </View>
             <View style={styles.segundaParteLogin}>
                 <Pressable style={styles.botaoLogar}>

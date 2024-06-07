@@ -11,6 +11,10 @@ export default function Cadastro({navigation}) {
     });
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [input, setInput] = useState('');
+    const [hidePass, setHidePass] = useState(true);
+    const [input2, setInput2] = useState('');
+    const [hidePass2, setHidePass2] = useState(true);
     
   return (
     <View style={styles.container}>
@@ -23,8 +27,38 @@ export default function Cadastro({navigation}) {
                 <TextInput style={styles.inputCadastro} placeholder='Seu nome' placeholderTextColor={'#fff'}/>
                 <TextInput style={styles.inputCadastro} placeholder='Seu sobrenome' placeholderTextColor={'#fff'}/>
                 <TextInput style={styles.inputCadastro} placeholder='E-mail' placeholderTextColor={'#fff'}/>
-                <TextInput style={styles.inputCadastro} placeholder='Senha' placeholderTextColor={'#fff'}/>
-                <TextInput style={styles.inputCadastro} placeholder='Confirmar senha' placeholderTextColor={'#fff'}/>
+                <View style={styles.inputArea}>
+                  <TextInput style={styles.inputCadastro} placeholder='Senha' placeholderTextColor={'#fff'} value={input} onChangeText={(texto) => setInput(texto)} secureTextEntry={hidePass}/>
+                  <Pressable style={styles.icon2} onPress={() => setHidePass(!hidePass)}>
+                        {hidePass ?
+                            <Image source={require('../../../assets/images/icons/visivel.png')}
+                            resizeMode='cover'
+                            style={{height: 35, width: 35}}
+                            />
+                            :
+                            <Image source={require('../../../assets/images/icons/invisivel.png')}
+                            resizeMode='cover'
+                            style={{height: 35, width: 35}}
+                            />      
+                        }
+                    </Pressable>
+                </View>
+                <View style={styles.inputArea}> 
+                  <TextInput style={styles.inputCadastro} placeholder='Confirmar senha' placeholderTextColor={'#fff'} value={input2} onChangeText={(texto) => setInput2(texto)} secureTextEntry={hidePass2}/>
+                  <Pressable style={styles.icon2} onPress={() => setHidePass2(!hidePass2)}>
+                        {hidePass2 ?
+                            <Image source={require('../../../assets/images/icons/visivel.png')}
+                            resizeMode='cover'
+                            style={{height: 35, width: 35}}
+                            />
+                            :
+                            <Image source={require('../../../assets/images/icons/invisivel.png')}
+                            resizeMode='cover'
+                            style={{height: 35, width: 35}}
+                            />      
+                        }
+                    </Pressable>
+                </View> 
             </View>
             <View style={styles.segundaParteLogin}>
                 <Pressable style={styles.botaoLogar} onPress={() => setModalVisible(true)}>
