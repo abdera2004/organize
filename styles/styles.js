@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+    
     container: {
         flex: 1,
         backgroundColor: '#21C25F',
@@ -196,26 +197,48 @@ const styles = StyleSheet.create({
     },
     card: {
         height: 244,
-        width: 318,
+        width: 344,
         backgroundColor: '#2B2525',
         borderRadius: 15,
+        marginBottom: 20
     },
     primeiraMetadeCard: {
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        flex: 1
     },
     segundaMetadeCard: {
-
+        flex: 1,
+        justifyContent: 'space-between'
     },
     textoCard: {
         fontSize: 24,
         color: 'white',
         fontWeight: 'bold',
         paddingStart: 10,
+        fontFamily: 'Inter_400Regular',
+        marginTop: 10
     },
     visibilidade: {
         paddingTop: 10,
         paddingEnd: 10
+    },
+    botaoCard: {
+        color: '#21C25F',
+        fontSize: 24,
+        fontWeight: 'bold',
+        fontFamily: 'Inter_400Regular',
+        borderWidth: 1,
+        borderColor: '#21C25F',
+        backgroundColor: 'transparent',
+        borderRadius: 15,
+        width: '95%',
+        alignItems: 'center'
+    },
+    alinhamentoBotao: {
+        width: '100%',
+        alignItems: 'center',
+        paddingBottom: 10
     }
 });
 

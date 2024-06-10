@@ -1,11 +1,13 @@
 import { View, Text, Pressable, Image } from "react-native";
 import styles from '../../../styles/styles';
 import Header from '../../../src/components/Header';
+import { ScrollView } from "react-native";
 
 export default function Home({navigation}) {
   return (
     <View style={styles.containerHome}>
         <Header/>
+        <ScrollView>
         <View style={styles.card}>
           <View style={[styles.primeiraMetadeCard, {borderBottomWidth: 1, borderBottomColor: 'white'}]}>
             <Text style={[styles.textoCard, {marginBottom: 30}]}>Saldo{'\n'}R$0,00</Text>
@@ -18,9 +20,40 @@ export default function Home({navigation}) {
           </View>
           <View style={styles.segundaMetadeCard}>
             <Text style={styles.textoCard}>Minhas contas</Text>
-            <Pressable style={styles.botaoCard}>Gerenciar contas</Pressable>
+            <View style={styles.alinhamentoBotao}>
+              <Pressable style={styles.botaoCard}>
+                <Text style={{fontSize: 24, fontWeight: 'bold', color: '#21C25F', fontFamily: 'Inter_400Regular', padding: 5}}>Gerenciar contas</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
+        <View style={styles.card}>
+          <View style={styles.primeiraMetadeCard}>
+            <Text style={styles.textoCard}>Meus cartões</Text>
+          </View>
+          <View style={styles.segundaMetadeCard}>
+            <Text style={styles.textoCard}>Acompanhe sua fatura</Text>
+            <View style={styles.alinhamentoBotao}>
+              <Pressable style={styles.botaoCard}>
+                <Text style={{fontSize: 24, fontWeight: 'bold', color: '#21C25F', fontFamily: 'Inter_400Regular', padding: 5}}>Adicionar cartão</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+        <View style={styles.card}>
+          <View style={styles.primeiraMetadeCard}>
+            <Text style={styles.textoCard}>Primeiros passos</Text>
+          </View>
+          <View style={styles.segundaMetadeCard}>
+            <Text style={styles.textoCard}>Acompanhe sua fatura</Text>
+            <View style={styles.alinhamentoBotao}>
+              <Pressable style={styles.botaoCard}>
+                <Text style={{fontSize: 24, fontWeight: 'bold', color: '#21C25F', fontFamily: 'Inter_400Regular', padding: 5}}>Continuar</Text>
+              </Pressable>
+            </View>
+          </View>
+        </View>
+        </ScrollView>
     </View>
   );
 };
