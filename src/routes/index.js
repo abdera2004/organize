@@ -11,8 +11,8 @@ const Routes = () =>{
         
         <Stack.Navigator>
             <Stack.Screen
-            name="Intro"
-            component={Intro}
+            name="Home"
+            component={Home}
             options={{headerShown: false}}
             />
             <Stack.Screen
@@ -26,8 +26,8 @@ const Routes = () =>{
             options={{headerShown: false}}
             />
             <Stack.Screen
-            name='Home'
-            component={Home}
+            name='Intro'
+            component={Intro}
             options={{headerShown: false}}
             />
         </Stack.Navigator>

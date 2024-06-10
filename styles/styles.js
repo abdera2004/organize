@@ -192,7 +192,30 @@ const styles = StyleSheet.create({
         backgroundColor: '#1A1717',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        paddingHorizontal: 20,
+        paddingHorizontal: 12,
+    },
+    card: {
+        height: 244,
+        width: 318,
+        backgroundColor: '#2B2525',
+        borderRadius: 15,
+    },
+    primeiraMetadeCard: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    segundaMetadeCard: {
+
+    },
+    textoCard: {
+        fontSize: 24,
+        color: 'white',
+        fontWeight: 'bold',
+        paddingStart: 10,
+    },
+    visibilidade: {
+        paddingTop: 10,
+        paddingEnd: 10
     }
 });
 
