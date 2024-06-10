@@ -2,12 +2,14 @@ import { View, Text, Pressable, Image } from "react-native";
 import styles from '../../../styles/styles';
 import Header from '../../../src/components/Header';
 import { ScrollView } from "react-native";
+import Nabar from '../../../src/components/Navbar';
+import Navbar from "../../../src/components/Navbar";
 
 export default function Home({navigation}) {
   return (
     <View style={styles.containerHome}>
         <Header/>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.card}>
           <View style={[styles.primeiraMetadeCard, {borderBottomWidth: 1, borderBottomColor: 'white'}]}>
             <Text style={[styles.textoCard, {marginBottom: 30}]}>Saldo{'\n'}R$0,00</Text>
@@ -54,6 +56,7 @@ export default function Home({navigation}) {
           </View>
         </View>
         </ScrollView>
+        <Navbar/>
     </View>
   );
 };
