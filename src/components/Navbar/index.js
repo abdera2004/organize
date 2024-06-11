@@ -1,7 +1,11 @@
 import React from "react";
 import { View, StyleSheet, Pressable, Image } from "react-native";
+import {useNavigation} from '@react-navigation/native';
 
-export default function Navbar({navigation}) {
+export default function Navbar() {
+
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
             <View style={styles.navBar}>

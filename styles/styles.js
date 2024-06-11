@@ -239,6 +239,67 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         paddingBottom: 10
+    },
+    containerSaldo: {
+        flex: 1,
+        backgroundColor: '#1A1717',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    textoSaldo: {
+        fontSize: 32,
+        fontWeight: 'bold',
+        color: 'white',
+        width: '100%',
+        paddingStart: 15,
+        marginBottom: 60,
+        fontFamily: 'Inter_400Regular',
+    },
+    listaBotoes: {
+        flex: 0.2,
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-evenly'
+    },
+    botaoSaldo: {
+        height: 80,
+        width: 80,
+        backgroundColor: '#2B2525',
+        borderRadius: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    textoBotaoSaldo: {
+        fontSize: 15,
+        color: 'white',
+        fontWeight: 'bold',
+        fontFamily: 'Inter_400Regular',
+    },
+    divBotaoSaldo: {
+        alignItems: 'center',
+        flex: 1
+    },
+    transacoes: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-between',
+        paddingHorizontal: 10,
+        flex: 1,
+        top: 150
+    },
+    transacaoENome: {
+        flex: 1,
+        alignItems: 'center'
+    },
+    textoVariavel: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        fontFamily: 'Inter_400Regular',
+    },
+    textoRelatorio: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontFamily: 'Inter_400Regular',
     }
 });
 

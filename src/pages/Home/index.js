@@ -2,10 +2,9 @@ import { View, Text, Pressable, Image } from "react-native";
 import styles from '../../../styles/styles';
 import Header from '../../../src/components/Header';
 import { ScrollView } from "react-native";
-import Nabar from '../../../src/components/Navbar';
 import Navbar from "../../../src/components/Navbar";
 
-export default function Home({navigation}) {
+export default function Home() {
   return (
     <View style={styles.containerHome}>
         <Header/>
