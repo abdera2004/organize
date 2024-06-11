@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text, StatusBar, Pressable, Image } from "react-native";
 import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
+import {useNavigation} from '@react-navigation/native';
 
 const statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight+22 : 64;
 
@@ -10,9 +11,11 @@ export default function Header() {
         Inter_400Regular,
     });
 
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
-            <View style={styles.conteudo}>
+            <Pressable style={styles.conteudo} onPress={() => navigation.navigate('Perfil')}>
                 <View style={styles.fotoPerfil}>
                     <Image source={require('../../../assets/images/icons/user.png')}/>
                 </View>
@@ -20,7 +23,7 @@ export default function Header() {
                 <View style={styles.notificacao}>
                     <Image source={require('../../../assets/images/icons/sino.png')}/>
                 </View>
-            </View>
+            </Pressable>
         </View>
     )
 }

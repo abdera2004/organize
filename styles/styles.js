@@ -1,4 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, StatusBar } from "react-native";
+
+const statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight+10 : 64;
 
 const styles = StyleSheet.create({
     
@@ -300,6 +302,51 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
         fontFamily: 'Inter_400Regular',
+    },
+    headerEditarPerfil: {
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingTop: statusBarHeight,
+        justifyContent: 'space-between',
+        flex: 0.1,
+        marginBottom: 20
+    },
+    menu: {
+        flex: 9,
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '100%'
+    },
+    fotoPerfil: {
+        height: 80,
+        width: 80,
+        backgroundColor: 'white',
+        borderRadius: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10
+    },
+    nomeUsuario: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 24,
+        fontFamily: 'Inter_400Regular',
+        marginBottom: 20
+    },
+    opcaoMenu: {
+        flex: 1,
+        borderBottomWidth: 1,
+        borderBottomColor: 'white',
+        justifyContent: 'center'
+    },
+    textoMenu: {
+        color: 'white',
+        fontSize: 24,
+        fontWeight: 'bold',
+        fontFamily: 'Inter_400Regular',
+        paddingVertical: 4,
+        paddingStart: 5
     }
 });
 

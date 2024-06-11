@@ -1,9 +1,19 @@
-import {View, Text} from 'react-native';
+import {View, Text, Pressable, Image, FlatList} from 'react-native';
+import styles from '../../../styles/styles';
 
 export default function App() {
   return (
-    <View>
-        <Text></Text>
+    <View style={styles.containerHome}>
+      <View style={[styles.headerEditarPerfil, {justifyContent: 'flex-start'}]}>
+        <Pressable onPress={() => navigation.navigate('Perfil')}>
+          <Image
+            source={require('../../../assets/images/icons/esquerda.png')}
+            resizeMode='cover'
+            style={{width: 60, height: 60}}
+          />
+        </Pressable>
+        <Text style={styles.textoCard}>Contas</Text>
+      </View>
     </View>
   );
 };
