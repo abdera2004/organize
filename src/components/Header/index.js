@@ -5,7 +5,7 @@ import {useNavigation} from '@react-navigation/native';
 
 const statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight+22 : 64;
 
-export default function Header() {
+export default function Header({nome}) {
 
     useFonts({
         Inter_400Regular,
@@ -19,7 +19,7 @@ export default function Header() {
                 <View style={styles.fotoPerfil}>
                     <Image source={require('../../../assets/images/icons/user.png')}/>
                 </View>
-                <Text style={styles.texto}>Bom dia,{'\n'}Ruan</Text>
+                <Text style={styles.texto}>Bom dia,{'\n'}{nome}</Text>
                 <View style={styles.notificacao}>
                     <Image source={require('../../../assets/images/icons/sino.png')}/>
                 </View>
@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         color: 'white',
-        paddingEnd: 70
+        paddingEnd: 70,
+        fontFamily: 'Inter_400Regular'
     },
     fotoPerfil: {
         height: 80,

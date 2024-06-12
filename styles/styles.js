@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Inter_400Regular',
     },
     listaBotoes: {
-        flex: 0.2,
+        flex: 0.3,
         flexDirection: 'row',
         width: '100%',
         justifyContent: 'space-evenly'
@@ -347,6 +347,12 @@ const styles = StyleSheet.create({
         fontFamily: 'Inter_400Regular',
         paddingVertical: 4,
         paddingStart: 5
+    },
+    lista: {
+        borderTopWidth: 1,
+        borderColor: 'white',
+        flex: 1,
+        width: '100%'
     }
 });
 

@@ -7,7 +7,7 @@ import Navbar from "../../../src/components/Navbar";
 export default function Home() {
   return (
     <View style={styles.containerHome}>
-        <Header/>
+        <Header nome='Ruan'/>
         <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.card}>
           <View style={[styles.primeiraMetadeCard, {borderBottomWidth: 1, borderBottomColor: 'white'}]}>

@@ -2,6 +2,26 @@ import {View, Text, Pressable, Image, FlatList} from 'react-native';
 import styles from '../../../styles/styles';
 import Header2 from '../../components/Header2';
 import Navbar from '../../components/Navbar';
+import Movimentos from '../../components/Movimentos';
+
+const list = [
+  {
+    id: 1,
+    saldo: 'Saldo adicionado:',
+    valor: '100,00',
+    data: '29/05/2024',
+    remetente: 'João Silva',
+    type: 1 //receita
+  },
+  {
+    id: 2,
+    saldo: 'Saldo removido:',
+    valor: '100,00',
+    data: '29/05/2024',
+    remetente: 'Academia fitness',
+    type: 0 //despesa
+  }
+]
 
 export default function Saldo({navigation}) {
   return (
@@ -27,10 +47,10 @@ export default function Saldo({navigation}) {
             <Pressable style={styles.botaoSaldo} onPress={() => navigation.navigate('Relatorio')}> 
               <Image source={require('../../../assets/images/icons/relatorio.png')} resizeMode='cover'/>
             </Pressable>
-            <Text style={styles.textoBotaoSaldo}>Relatorio</Text>
+            <Text style={styles.textoBotaoSaldo}>Relatório</Text>
           </View>
         </View>
-        <FlatList />
+        <FlatList style={styles.lista} data={list} keyExtractor={(item) => String(item.id)} showsVerticalScrollIndicator={false} renderItem={({item}) => <Movimentos data={item}/>}/>
         <Navbar/>
     </View>
   );
