@@ -310,7 +310,8 @@ const styles = StyleSheet.create({
         paddingTop: statusBarHeight,
         justifyContent: 'space-between',
         flex: 0.1,
-        marginBottom: 20
+        marginBottom: 20,
+        paddingHorizontal: 5
     },
     menu: {
         flex: 9,
@@ -354,7 +355,29 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         margin: 14
-    }
+    },
+    menuEditar: {
+        flex: 1,
+        borderColor: 'white',
+        borderTopWidth: 1,
+        width: '100%',
+        alignItems: 'center',   
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        paddingHorizontal: 5   
+    },
+    label: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#363535',
+        fontFamily: 'Inter_400Regular'
+    },
+    tituloOpcao: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: 'white',
+        fontFamily: 'Inter_400Regular'
+    },
 });
 
 export default styles;

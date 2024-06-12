@@ -12,7 +12,6 @@ export default function App() {
             style={{width: 60, height: 60}}
           />
         </Pressable>
-        <Text style={styles.textoCard}>Contas</Text>
       </View>
     </View>
   );
