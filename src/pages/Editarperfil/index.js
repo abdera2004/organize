@@ -1,15 +1,14 @@
 import {View, Text, Pressable, Image} from 'react-native';
 import styles from '../../../styles/styles';
 
-export default function App() {
+export default function Editarperfil({navigation}) {
   return (
     <View style={[styles.containerHome, {padding: 0}]}>
-      <View style={[styles.headerEditarPerfil, {marginBottom: 30}]}>
-        <Pressable onPress={() => navigation.navigate('Home')}>
+      <View style={[styles.headerEditarPerfil, {marginBottom: 30, paddingHorizontal: 17}]}>
+        <Pressable onPress={() => navigation.navigate('Perfil')}>
           <Image
             source={require('../../../assets/images/icons/esquerda.png')}
             resizeMode='cover'
-            style={{width: 60, height: 60}}
           />
         </Pressable>
         <Pressable>

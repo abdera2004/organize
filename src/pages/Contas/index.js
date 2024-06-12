@@ -1,7 +1,7 @@
 import {View, Text, Pressable, Image, FlatList} from 'react-native';
 import styles from '../../../styles/styles';
 
-export default function App() {
+export default function Contas({navigation}) {
   return (
     <View style={styles.containerHome}>
       <View style={[styles.headerEditarPerfil, {justifyContent: 'flex-start'}]}>
@@ -9,7 +9,6 @@ export default function App() {
           <Image
             source={require('../../../assets/images/icons/esquerda.png')}
             resizeMode='cover'
-            style={{width: 60, height: 60}}
           />
         </Pressable>
       </View>
