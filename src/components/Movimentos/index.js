@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: 'white',
         width: '100%',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingVertical: 10
     },
     texto: {
         fontSize: 15,
@@ -62,6 +63,6 @@ const styles = StyleSheet.create({
         height: 10,
         backgroundColor: '#2B2525',
         borderRadius: 8,
-        marginStart: 5,
+        marginStart: 8,
     }
 })

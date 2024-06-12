@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         paddingStart: 10,
         fontFamily: 'Inter_400Regular',
-        marginTop: 10
+        marginTop: 10,
     },
     visibilidade: {
         paddingTop: 10,

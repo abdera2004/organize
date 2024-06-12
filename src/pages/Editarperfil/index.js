@@ -12,9 +12,9 @@ export default function App() {
             style={{width: 60, height: 60}}
           />
         </Pressable>
-        <Text style={[styles.textoCard, {paddingEnd: 140}]}>Editar perfil</Text>
+        <Text style={[styles.textoCard, {paddingEnd: 100, bottom: 4}]}>Editar perfil</Text>
         <Pressable>
-          <Text style={styles.textoCard}>Salvar</Text>
+          <Text style={[styles.textoCard, {bottom: 4}]}>Salvar</Text>
         </Pressable>
       </View>
       <View style={styles.menu}>
