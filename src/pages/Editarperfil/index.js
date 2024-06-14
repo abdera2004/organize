@@ -1,7 +1,25 @@
 import {View, Text, Pressable, Image} from 'react-native';
 import styles from '../../../styles/styles';
+import * as ImagePicker from 'expo-image-picker';
+import { useState } from 'react';
 
 export default function Editarperfil({navigation}) {
+
+  const [image, setImage] = useState(null);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [5, 5],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
   return (
     <View style={[styles.containerHome, {padding: 0}]}>
       <View style={[styles.headerEditarPerfil, {marginBottom: 30, paddingHorizontal: 17}]}>
@@ -17,10 +35,13 @@ export default function Editarperfil({navigation}) {
       </View>
       <View style={styles.menu}>
         <View style={styles.fotoPerfil}>
-          <Image source={require('../../../assets/images/icons/user.png')} resizeMode='cover'/>
+          {image && <Image source={{ uri: image }} style={styles.image} resizeMode='cover'/>}
+        {!image && (
+            <Image source={require('../../../assets/images/icons/user.png')} resizeMode='cover'/>
+          )}
         </View>
         <Text style={styles.nomeUsuario}>Ruan</Text>
-        <Pressable onPress={() => navigation.navigate('Editarperfil')}>
+        <Pressable onPress={pickImage}>
           <Text style={{fontSize: 24, fontWeight: 'bold', color: '#21C25F', fontFamily: 'Inter_400Regular', padding: 5}}>Alterar imagem</Text>
         </Pressable>
         <View style={styles.menuEditar}>

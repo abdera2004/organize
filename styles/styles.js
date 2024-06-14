@@ -378,6 +378,11 @@ const styles = StyleSheet.create({
         color: 'white',
         fontFamily: 'Inter_400Regular'
     },
+    image: {
+        width: 80,
+        height: 80,
+        borderRadius: 50
+      },
 });
 
 export default styles;
