@@ -1,7 +1,9 @@
-import { View, Text, Pressable, TextInput, Modal, Image} from 'react-native';
+import { View, Text, Pressable, TextInput, Modal, Image, Alert} from 'react-native';
 import styles from '../../../styles/styles';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
+import * as SQLite from 'expo-sqlite';
+import { createTable, insertUser } from '../../database/database';
 
 export default function Cadastro({navigation}) {
 
@@ -10,10 +12,41 @@ export default function Cadastro({navigation}) {
     });
 
     const [modalVisible, setModalVisible] = useState(false);
-    const [input, setInput] = useState('');
     const [hidePass, setHidePass] = useState(true);
     const [input2, setInput2] = useState('');
     const [hidePass2, setHidePass2] = useState(true);
+
+    const [nome, setNome] = useState('');
+    const [sobrenome, setSobrenome] = useState('');
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const [foto, setFoto] = useState(null);
+
+    React.useEffect(() => {
+      createTable();
+    }, []);
+
+    const handleCadastro = () => {
+      // Verifica se todos os campos estão preenchidos
+      if (!nome || !sobrenome || !email || !senha) {
+        Alert.alert('Erro', 'Todos os campos são obrigatórios.');
+        return;
+      }
+    
+      insertUser(nome, sobrenome, email, senha, foto)
+      .then(() => {
+        Alert.alert('Sucesso', 'Usuário cadastrado com sucesso.');
+        // Limpar os campos após cadastro
+        setNome('');
+        setSobrenome('');
+        setEmail('');
+        setSenha('');
+        setFoto(null);
+      })
+      .catch((error) => {
+        Alert.alert('Erro', error.message);
+      });
+  };
     
   return (
     <View style={styles.container}>
@@ -23,11 +56,11 @@ export default function Cadastro({navigation}) {
         </View>
         <View style={styles.divCadastro}>
             <View style={styles.primeiraParteCadastro}>
-                <TextInput style={styles.inputCadastro} placeholder='Seu nome' placeholderTextColor={'#fff'}/>
-                <TextInput style={styles.inputCadastro} placeholder='Seu sobrenome' placeholderTextColor={'#fff'}/>
-                <TextInput style={styles.inputCadastro} placeholder='E-mail' placeholderTextColor={'#fff'}/>
+                <TextInput style={styles.inputCadastro} placeholder='Seu nome' placeholderTextColor={'#fff'} value={nome} onChangeText={setNome}/>
+                <TextInput style={styles.inputCadastro} placeholder='Seu sobrenome' placeholderTextColor={'#fff'} value={sobrenome} onChangeText={setSobrenome}/>
+                <TextInput style={styles.inputCadastro} placeholder='E-mail' placeholderTextColor={'#fff'} value={email} onChangeText={setEmail} keyboardType='email-address'/>
                 <View style={styles.inputArea}>
-                  <TextInput style={styles.inputCadastro} placeholder='Senha' placeholderTextColor={'#fff'} value={input} onChangeText={(texto) => setInput(texto)} secureTextEntry={hidePass}/>
+                  <TextInput style={styles.inputCadastro} placeholder='Senha' placeholderTextColor={'#fff'} value={senha} onChangeText={setSenha} secureTextEntry={hidePass}/>
                   <Pressable style={styles.icon2} onPress={() => setHidePass(!hidePass)}>
                         {hidePass ?
                             <Image source={require('../../../assets/images/icons/visivel.png')}
@@ -60,7 +93,7 @@ export default function Cadastro({navigation}) {
                 </View> 
             </View>
             <View style={styles.segundaParteLogin}>
-                <Pressable style={styles.botaoLogar} onPress={() => setModalVisible(true)}>
+                <Pressable style={styles.botaoLogar} onPress={() => [setModalVisible(true), handleCadastro]}>
                     <Text style={styles.textoBotaoLogar}>Criar conta</Text>
                 </Pressable>
             </View>
@@ -78,8 +111,8 @@ export default function Cadastro({navigation}) {
               <Text style={styles.textoContinuarModal}>Conta criada com sucesso!</Text>
             </Pressable>
           </View>
-        </View>
-      </Modal>
+        </View>adi
+    </Modal>
     </View>
   );
 };

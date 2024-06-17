@@ -6,7 +6,7 @@ const db = SQLite.openDatabase('mydatabase.db');
 const createTable = () => {
   db.transaction((tx) => {
     tx.executeSql(
-      'CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, email TEXT, senha TEXT, saldo REAL DEFAULT 0)',
+      'CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, sobrenome TEXT, email TEXT, senha TEXT, foto BLOB, saldo REAL DEFAULT 0)',
       [],
       () => {
         console.log('Tabela de usuários criada com sucesso');
@@ -28,7 +28,7 @@ const createTable = () => {
   });
 };
 
-const insertUser = (nome, email, senha) => {
+const insertUser = (nome, sobrenome, email, senha, foto) => {
   return new Promise((resolve, reject) => {
     // Verificar se já existe um usuário com o mesmo nome ou e-mail
     db.transaction((tx) => {
@@ -43,8 +43,8 @@ const insertUser = (nome, email, senha) => {
           } else {
             // Nenhum usuário encontrado com o mesmo nome ou e-mail, realizar inserção
             tx.executeSql(
-              'INSERT INTO Users (nome, email, senha) VALUES (?, ?, ?)',
-              [nome, email, senha],
+              'INSERT INTO Users (nome, sobrenome, email, senha, foto) VALUES (?, ?, ?, ?)',
+              [nome, sobrenome, email, senha],
               () => {
                 console.log('Usuário inserido com sucesso');
                 resolve();
@@ -126,7 +126,7 @@ const clearDatabase = () => {
 
       // Recriar tabelas
       tx.executeSql(
-        'CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, email TEXT, senha TEXT, saldo REAL DEFAULT 0)',
+        'CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, sobrenome, email TEXT, senha TEXT, foto BLOB, saldo REAL DEFAULT 0)',
         [],
         () => {
           console.log('Tabela "Users" recriada');
