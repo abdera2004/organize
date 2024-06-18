@@ -3,7 +3,7 @@ import styles from '../../../styles/styles';
 import { useState, useEffect } from 'react';
 import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
 import * as SQLite from 'expo-sqlite';
-import { createTable, insertUser } from '../../database/database';
+import { createTable, insertUser, } from '../../database/database';
 
 export default function Cadastro({navigation}) {
 
@@ -22,7 +22,7 @@ export default function Cadastro({navigation}) {
     const [senha, setSenha] = useState('');
     const [foto, setFoto] = useState(null);
 
-    React.useEffect(() => {
+    useEffect(() => {
       createTable();
     }, []);
 
@@ -35,7 +35,7 @@ export default function Cadastro({navigation}) {
     
       insertUser(nome, sobrenome, email, senha, foto)
       .then(() => {
-        Alert.alert('Sucesso', 'Usuário cadastrado com sucesso.');
+        setModalVisible(true);
         // Limpar os campos após cadastro
         setNome('');
         setSobrenome('');
@@ -93,7 +93,7 @@ export default function Cadastro({navigation}) {
                 </View> 
             </View>
             <View style={styles.segundaParteLogin}>
-                <Pressable style={styles.botaoLogar} onPress={() => [setModalVisible(true), handleCadastro]}>
+                <Pressable style={styles.botaoLogar} onPress={() => handleCadastro()}>
                     <Text style={styles.textoBotaoLogar}>Criar conta</Text>
                 </Pressable>
             </View>
@@ -111,7 +111,7 @@ export default function Cadastro({navigation}) {
               <Text style={styles.textoContinuarModal}>Conta criada com sucesso!</Text>
             </Pressable>
           </View>
-        </View>adi
+        </View>
     </Modal>
     </View>
   );

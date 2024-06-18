@@ -3,11 +3,30 @@ import styles from '../../../styles/styles';
 import Header from '../../../src/components/Header';
 import { ScrollView } from "react-native";
 import Navbar from "../../../src/components/Navbar";
+import {getUserById} from '../../database/database';
+import { useState, useEffect } from "react";
 
 export default function Home() {
+
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    const fetchUserName = async () => {
+      try {
+        const userId = 1; // Substitua pelo ID do usuário que você deseja buscar
+        const user = await getUserById(userId);
+        setUserName(user.nome);
+      } catch (error) {
+        console.log('Erro ao buscar usuário:', error);
+      }
+    };
+
+    fetchUserName();
+  }, []);
+
   return (
     <View style={styles.containerHome}>
-        <Header nome='Ruan'/>
+        <Header nome={userName}/>
         <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.card}>
           <View style={[styles.primeiraMetadeCard, {borderBottomWidth: 1, borderBottomColor: 'white'}]}>

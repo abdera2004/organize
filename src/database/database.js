@@ -6,7 +6,15 @@ const db = SQLite.openDatabase('mydatabase.db');
 const createTable = () => {
   db.transaction((tx) => {
     tx.executeSql(
-      'CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, sobrenome TEXT, email TEXT, senha TEXT, foto BLOB, saldo REAL DEFAULT 0)',
+      `CREATE TABLE IF NOT EXISTS Users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT,
+        sobrenome TEXT,
+        email TEXT,
+        senha TEXT,
+        foto BLOB,
+        saldo REAL DEFAULT 0
+      )`,
       [],
       () => {
         console.log('Tabela de usuários criada com sucesso');
@@ -16,7 +24,11 @@ const createTable = () => {
       }
     );
     tx.executeSql(
-      'CREATE TABLE IF NOT EXISTS Session (id INTEGER PRIMARY KEY AUTOINCREMENT, userId INTEGER, authToken TEXT)',
+      `CREATE TABLE IF NOT EXISTS Session (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        userId INTEGER,
+        authToken TEXT
+      )`,
       [],
       () => {
         console.log('Tabela de sessão criada com sucesso');
@@ -28,23 +40,23 @@ const createTable = () => {
   });
 };
 
-const insertUser = (nome, sobrenome, email, senha, foto) => {
+const insertUser = (nome, sobrenome, email, senha) => {
   return new Promise((resolve, reject) => {
     // Verificar se já existe um usuário com o mesmo nome ou e-mail
     db.transaction((tx) => {
       tx.executeSql(
-        'SELECT COUNT(*) FROM Users WHERE nome = ? OR email = ?',
+        'SELECT COUNT(*) AS count FROM Users WHERE nome = ? OR email = ?',
         [nome, email],
         (_, { rows }) => {
-          const count = rows.item(0)['COUNT(*)'];
+          const count = rows.item(0).count;
           if (count > 0) {
             // Já existe um usuário com o mesmo nome ou e-mail
             reject(new Error('Já existe um usuário com o mesmo nome ou e-mail.'));
           } else {
             // Nenhum usuário encontrado com o mesmo nome ou e-mail, realizar inserção
             tx.executeSql(
-              'INSERT INTO Users (nome, sobrenome, email, senha, foto) VALUES (?, ?, ?, ?)',
-              [nome, sobrenome, email, senha],
+              'INSERT INTO Users (nome, sobrenome, email, senha, foto) VALUES (?, ?, ?, ?, ?)',
+              [nome, sobrenome, email, senha, null],
               () => {
                 console.log('Usuário inserido com sucesso');
                 resolve();
@@ -126,7 +138,7 @@ const clearDatabase = () => {
 
       // Recriar tabelas
       tx.executeSql(
-        'CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, sobrenome, email TEXT, senha TEXT, foto BLOB, saldo REAL DEFAULT 0)',
+        'CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, sobrenome TEXT, email TEXT, senha TEXT, foto BLOB, saldo REAL DEFAULT 0)',
         [],
         () => {
           console.log('Tabela "Users" recriada');
@@ -233,4 +245,54 @@ const getUserBalance = (userId) => {
   });
 };
 
-export { createTable, insertUser, getUsers, getUserByNameAndPassword, clearDatabase, insertSession, getSession, getUserBalance, updateUserBalance };
+// Função para excluir o banco de dados
+import * as FileSystem from 'expo-file-system';
+
+const dbName = 'mydatabase.db';
+
+const deleteDatabase = async () => {
+  const dbPath = `${FileSystem.documentDirectory}SQLite/${dbName}`;
+  
+  try {
+    // Verifique se o arquivo de banco de dados existe
+    const fileInfo = await FileSystem.getInfoAsync(dbPath);
+    
+    if (fileInfo.exists) {
+      // Feche o banco de dados antes de excluí-lo
+      const db = SQLite.openDatabase(dbName);
+      db.closeAsync();
+
+      // Exclua o arquivo de banco de dados
+      await FileSystem.deleteAsync(dbPath, { idempotent: true });
+      console.log('Banco de dados excluído com sucesso');
+    } else {
+      console.log('Banco de dados não encontrado');
+    }
+  } catch (error) {
+    console.log('Erro ao excluir o banco de dados', error);
+  }
+};
+
+const getUserById = (userId) => {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM Users WHERE id = ?',
+        [userId],
+        (_, { rows }) => {
+          if (rows.length > 0) {
+            resolve(rows.item(0)); // Retorna o usuário encontrado
+          } else {
+            reject(new Error('Usuário não encontrado'));
+          }
+        },
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
+  });
+};
+
+
+export { getUserById, createTable, insertUser, getUsers, getUserByNameAndPassword, clearDatabase, insertSession, getSession, getUserBalance, updateUserBalance, deleteDatabase };
