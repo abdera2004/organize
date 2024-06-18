@@ -1,8 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import { View, Text, Pressable, TextInput, Image } from 'react-native';
+import { View, Text, Pressable, TextInput, Image, Alert } from 'react-native';
 import styles from '../../../styles/styles';
 import { useState } from 'react';
 import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
+import { getUserByEmailAndPassword } from '../../database/database';
 
 export default function Login({navigation}) {
 
@@ -10,8 +10,18 @@ export default function Login({navigation}) {
         Inter_400Regular,
       });
     
-    const [input, setInput] = useState('');
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
     const [hidePass, setHidePass] = useState(true);
+
+    const handleLogin = async () => {
+        try {
+          const user = await getUserByEmailAndPassword(email, senha);
+          navigation.navigate('Home', { userId: user.id, userName: user.nome }); // Passar o ID e nome do usuário para a tela inicial
+        } catch (error) {
+          Alert.alert('Erro de Login', error.message);
+        }
+      };
 
   return (
     <View style={styles.container}>
@@ -21,9 +31,9 @@ export default function Login({navigation}) {
         </View>
         <View style={styles.divLogin}>
             <View style={styles.primeiraParteLogin}>
-                <TextInput style={styles.inputLogin} placeholder='E-mail' placeholderTextColor={'#fff'}/>
+                <TextInput style={styles.inputLogin} placeholder='E-mail' placeholderTextColor={'#fff'} value={email} onChangeText={setEmail}/>
                 <View style={styles.inputArea}>
-                    <TextInput style={styles.inputLogin} placeholder='Senha' placeholderTextColor={'#fff'} value={input} onChangeText={(texto) => setInput(texto)} secureTextEntry={hidePass}/>
+                    <TextInput style={styles.inputLogin} placeholder='Senha' placeholderTextColor={'#fff'} value={senha} onChangeText={setSenha} secureTextEntry={hidePass}/>
                     <Pressable style={styles.icon} onPress={() => setHidePass(!hidePass)}>
                         {hidePass ?
                             <Image source={require('../../../assets/images/icons/visivel.png')}
@@ -40,7 +50,7 @@ export default function Login({navigation}) {
                 </View>
             </View>
             <View style={styles.segundaParteLogin}>
-                <Pressable style={styles.botaoLogar}>
+                <Pressable style={styles.botaoLogar} onPress={handleLogin}>
                     <Text style={styles.textoBotaoLogar}>Logar</Text>
                 </Pressable>
             </View>

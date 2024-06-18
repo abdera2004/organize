@@ -3,12 +3,12 @@ import styles from '../../../styles/styles';
 import { useState, useEffect } from 'react';
 import { useFonts, Inter_400Regular } from "@expo-google-fonts/inter";
 import * as SQLite from 'expo-sqlite';
-import { createTable, insertUser, } from '../../database/database';
+import { createTable, insertUser, deleteDatabase} from '../../database/database';
 
 export default function Cadastro({navigation}) {
 
     useFonts({
-        Inter_400Regular,
+      Inter_400Regular,
     });
 
     const [modalVisible, setModalVisible] = useState(false);
@@ -26,26 +26,35 @@ export default function Cadastro({navigation}) {
       createTable();
     }, []);
 
-    const handleCadastro = () => {
-      // Verifica se todos os campos estão preenchidos
-      if (!nome || !sobrenome || !email || !senha) {
-        Alert.alert('Erro', 'Todos os campos são obrigatórios.');
-        return;
+    const handleCadastro = async () => {
+      try {
+          // Verifica se todos os campos estão preenchidos
+          if (!nome || !sobrenome || !email || !senha) {
+              Alert.alert('Erro', 'Todos os campos são obrigatórios.');
+              return;
+          }
+
+          // Insere o usuário no banco de dados
+          await insertUser(nome, sobrenome, email, senha, foto);
+
+          // Limpa os campos após o cadastro
+          limparCampos();
+
+          // Navega para a tela 'Home' e passa o nome do usuário como parâmetro
+          navigation.navigate('Home', { userName: nome });
+      } catch (error) {
+          console.error('Erro ao cadastrar usuário:', error);
+          // Tratar erro de cadastro
+          Alert.alert('Erro', 'Ocorreu um erro ao cadastrar o usuário. Por favor, tente novamente.');
       }
-    
-      insertUser(nome, sobrenome, email, senha, foto)
-      .then(() => {
-        setModalVisible(true);
-        // Limpar os campos após cadastro
-        setNome('');
-        setSobrenome('');
-        setEmail('');
-        setSenha('');
-        setFoto(null);
-      })
-      .catch((error) => {
-        Alert.alert('Erro', error.message);
-      });
+  };
+
+  const limparCampos = () => {
+      setNome('');
+      setSobrenome('');
+      setEmail('');
+      setSenha('');
+      setFoto(null);
   };
     
   return (

@@ -13,7 +13,7 @@ export default function Home() {
   useEffect(() => {
     const fetchUserName = async () => {
       try {
-        const userId = 1; // Substitua pelo ID do usuário que você deseja buscar
+        const userId = 1;
         const user = await getUserById(userId);
         setUserName(user.nome);
       } catch (error) {

@@ -96,17 +96,17 @@ const getUsers = () => {
   });
 };
 
-const getUserByNameAndPassword = (nome, senha) => {
+const getUserByEmailAndPassword = (email, senha) => {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
-        'SELECT * FROM Users WHERE nome = ? AND senha = ?',
-        [nome, senha],
+        'SELECT * FROM Users WHERE email = ? AND senha = ?',
+        [email, senha],
         (_, { rows }) => {
           if (rows.length > 0) {
             resolve(rows.item(0)); // Retorna o primeiro usuário encontrado
           } else {
-            reject(new Error('Nome de usuário ou senha inválidos'));
+            reject(new Error('Email ou senha inválidos'));
           }
         },
         (_, error) => {
@@ -295,4 +295,4 @@ const getUserById = (userId) => {
 };
 
 
-export { getUserById, createTable, insertUser, getUsers, getUserByNameAndPassword, clearDatabase, insertSession, getSession, getUserBalance, updateUserBalance, deleteDatabase };
+export { getUserById, createTable, insertUser, getUsers, getUserByEmailAndPassword, clearDatabase, insertSession, getSession, getUserBalance, updateUserBalance, deleteDatabase };
