@@ -33,7 +33,8 @@ export default function Cadastro({navigation}) {
           setSobrenome('');
           setEmail('');
           setSenha('');
-          navigation.navigate('Login', { userId }); // Passa o ID do usuário como parâmetro
+          setModalVisible(true);
+          navigation.navigate('Login', {userId});
         } catch (error) {
           console.error('Erro ao cadastrar usuário:', error);
           Alert.alert('Erro', 'Ocorreu um erro ao cadastrar o usuário.');
@@ -85,7 +86,7 @@ export default function Cadastro({navigation}) {
                 </View> 
             </View>
             <View style={styles.segundaParteLogin}>
-                <Pressable style={styles.botaoLogar} onPress={() => handleCadastro()}>
+                <Pressable style={styles.botaoLogar} onPress={() => setModalVisible(true)}>
                     <Text style={styles.textoBotaoLogar}>Criar conta</Text>
                 </Pressable>
             </View>
@@ -99,7 +100,7 @@ export default function Cadastro({navigation}) {
                 resizeMode='cover'
                 style={{height: 100, width: 100}}
             />
-            <Pressable onPress={() => [navigation.navigate('Login'), setModalVisible(false)]}>
+            <Pressable onPress={() => [handleCadastro(), setModalVisible(false)]}>
               <Text style={styles.textoContinuarModal}>Conta criada com sucesso!</Text>
             </Pressable>
           </View>
