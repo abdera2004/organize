@@ -27,36 +27,19 @@ export default function Cadastro({navigation}) {
     }, []);
 
     const handleCadastro = async () => {
-      try {
-          // Verifica se todos os campos estão preenchidos
-          if (!nome || !sobrenome || !email || !senha) {
-              Alert.alert('Erro', 'Todos os campos são obrigatórios.');
-              return;
-          }
-
-          // Insere o usuário no banco de dados
-          await insertUser(nome, sobrenome, email, senha, foto);
-
-          // Limpa os campos após o cadastro
-          limparCampos();
-
-          // Navega para a tela 'Home' e passa o nome do usuário como parâmetro
-          navigation.navigate('Home', { userName: nome });
-      } catch (error) {
+        try {
+          const userId = await insertUser(nome, sobrenome, email, senha); // Supondo que esta função retorne o ID do usuário inserido
+          setNome('');
+          setSobrenome('');
+          setEmail('');
+          setSenha('');
+          navigation.navigate('Login', { userId }); // Passa o ID do usuário como parâmetro
+        } catch (error) {
           console.error('Erro ao cadastrar usuário:', error);
-          // Tratar erro de cadastro
-          Alert.alert('Erro', 'Ocorreu um erro ao cadastrar o usuário. Por favor, tente novamente.');
-      }
-  };
+          Alert.alert('Erro', 'Ocorreu um erro ao cadastrar o usuário.');
+        }
+      };
 
-  const limparCampos = () => {
-      setNome('');
-      setSobrenome('');
-      setEmail('');
-      setSenha('');
-      setFoto(null);
-  };
-    
   return (
     <View style={styles.container}>
         <View style={styles.divTitulo}>
@@ -116,7 +99,7 @@ export default function Cadastro({navigation}) {
                 resizeMode='cover'
                 style={{height: 100, width: 100}}
             />
-            <Pressable onPress={() => [navigation.navigate('Home'), setModalVisible(false)]}>
+            <Pressable onPress={() => [navigation.navigate('Login'), setModalVisible(false)]}>
               <Text style={styles.textoContinuarModal}>Conta criada com sucesso!</Text>
             </Pressable>
           </View>

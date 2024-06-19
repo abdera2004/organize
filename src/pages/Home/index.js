@@ -6,23 +6,26 @@ import Navbar from "../../../src/components/Navbar";
 import {getUserById} from '../../database/database';
 import { useState, useEffect } from "react";
 
-export default function Home() {
+export default function Home({route}) {
 
-  const [userName, setUserName] = useState('');
-
+  const [userName, setUserName] = useState('Usuário');
+  
   useEffect(() => {
-    const fetchUserName = async () => {
-      try {
-        const userId = 1;
-        const user = await getUserById(userId);
-        setUserName(user.nome);
-      } catch (error) {
-        console.log('Erro ao buscar usuário:', error);
-      }
-    };
-
-    fetchUserName();
-  }, []);
+    if (route.params && route.params.userId) {
+      const userId = route.params.userId;
+      getUserById(userId)
+        .then(user => {
+          if (user) {
+            setUserName(user.nome);
+          } else {
+            console.error('Usuário não encontrado');
+          }
+        })
+        .catch(error => {
+          console.error('Erro ao buscar usuário:', error);
+        });
+    }
+  }, [route.params]);
 
   return (
     <View style={styles.containerHome}>
