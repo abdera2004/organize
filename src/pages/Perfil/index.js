@@ -30,7 +30,7 @@ export default function Perfil({ route }) {
         <Text style={styles.nomeUsuario}>{userName || 'Usuário'}</Text>
         <Pressable
           style={[styles.botaoCard, { width: '50%', marginBottom: 10 }]}
-          onPress={() => navigation.navigate('Editarperfil')}
+          onPress={() => navigation.navigate('Editarperfil', {userName})}
         >
           <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#21C25F', fontFamily: 'Inter_400Regular', padding: 5 }}>
             Editar perfil

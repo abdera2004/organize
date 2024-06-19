@@ -2,8 +2,12 @@ import {View, Text, Pressable, Image} from 'react-native';
 import styles from '../../../styles/styles';
 import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Editarperfil({navigation}) {
+export default function Editarperfil({route}) {
+
+  const navigation = useNavigation();
+  const { userName } = route.params;
 
   const [image, setImage] = useState(null);
 
@@ -23,7 +27,7 @@ export default function Editarperfil({navigation}) {
   return (
     <View style={[styles.containerHome, {padding: 0}]}>
       <View style={[styles.headerEditarPerfil, {marginBottom: 30, paddingHorizontal: 17}]}>
-        <Pressable onPress={() => navigation.navigate('Perfil')}>
+        <Pressable onPress={() => navigation.navigate('Perfil', {userName})}>
           <Image
             source={require('../../../assets/images/icons/esquerda.png')}
             resizeMode='cover'
@@ -40,7 +44,7 @@ export default function Editarperfil({navigation}) {
             <Image source={require('../../../assets/images/icons/user.png')} resizeMode='cover'/>
           )}
         </View>
-        <Text style={styles.nomeUsuario}>Ruan</Text>
+        <Text style={styles.nomeUsuario}>{userName || 'Usuário'}</Text>
         <Pressable onPress={pickImage}>
           <Text style={{fontSize: 24, fontWeight: 'bold', color: '#21C25F', fontFamily: 'Inter_400Regular', padding: 5}}>Alterar imagem</Text>
         </Pressable>
