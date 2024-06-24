@@ -106,6 +106,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         color: '#fff',
         paddingStart: 8,
+        paddingEnd: 8,
+        rowGap: 10,
     },
     inputCadastro: {
         fontSize: 24,
@@ -115,7 +117,8 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         backgroundColor: 'black',
         color: '#fff',
-        paddingStart: 8
+        paddingStart: 8,
+        rowGap: 5
     },
     botaoLogar: {
         width: '100%',
@@ -175,20 +178,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'black',
         borderRadius: 15,
-        width: '100%',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     icon: {
         justifyContent: 'center',
-        alignItems: 'center',
-        width: 60,
+        alignItems: 'flex-end',
+        width: '0%',
         height: 60,
+        right: 3
     },
     icon2: {
         justifyContent: 'center',
-        alignItems: 'center',
-        width: 60,
+        alignItems: 'flex-end',
+        width: '0%',
         height: 42,
+        right: 3
     },
     containerHome: {
         flex: 1,
