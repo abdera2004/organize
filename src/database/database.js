@@ -294,5 +294,20 @@ const getUserById = (userId) => {
   });
 };
 
+const updateUser = (obj) => {
+  return new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "UPDATE Users SET nome = ?, sobrenome = ?, email = ?, senha = ?, foto = ? WHERE id = ?;",
+        [obj.nome, obj.sobrenome, obj.email, obj.senha, obj.foto, obj.id],
+        (_, { rowsAffected }) => {
+          if (rowsAffected > 0) resolve(obj.id); // Se algum registro foi atualizado com sucesso
+          else reject("Nenhum registro foi atualizado"); // Caso contrário, nenhum registro foi atualizado
+        },
+        (_, error) => reject(error) // Em caso de erro durante a execução da query SQL
+      );
+    });
+  });
+};
 
-export { getUserById, createTable, insertUser, getUsers, getUserByEmailAndPassword, clearDatabase, insertSession, getSession, getUserBalance, updateUserBalance, deleteDatabase };
+export { updateUser, getUserById, createTable, insertUser, getUsers, getUserByEmailAndPassword, clearDatabase, insertSession, getSession, getUserBalance, updateUserBalance, deleteDatabase };

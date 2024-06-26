@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function Perfil({ route }) {
   const navigation = useNavigation();
-  const { userName, userSobrenome, userEmail, userSenha } = route.params;
+  const { userName, userSobrenome, userEmail, userSenha, userId} = route.params;
 
   return (
     <View style={styles.containerHome}>
@@ -30,7 +30,7 @@ export default function Perfil({ route }) {
         <Text style={styles.nomeUsuario}>{userName || 'Usuário'}</Text>
         <Pressable
           style={[styles.botaoCard, { width: '50%', marginBottom: 10 }]}
-          onPress={() => navigation.navigate('Editarperfil', {userName, userSobrenome, userEmail, userSenha})}
+          onPress={() => navigation.navigate('Editarperfil', {userName, userSobrenome, userEmail, userSenha, userId})}
         >
           <Text style={{ fontSize: 24, fontWeight: 'bold', color: '#21C25F', fontFamily: 'Inter_400Regular', padding: 5 }}>
             Editar perfil

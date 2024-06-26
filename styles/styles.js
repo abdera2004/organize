@@ -313,7 +313,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: statusBarHeight,
         justifyContent: 'space-between',
-        flex: 0.1,
+        flex: 0.5,
         marginBottom: 20,
         paddingHorizontal: 5
     },
@@ -367,8 +367,7 @@ const styles = StyleSheet.create({
         width: '100%',
         alignItems: 'center',   
         justifyContent: 'space-between',
-        flexDirection: 'row',
-        paddingHorizontal: 5   
+        flexDirection: 'row',   
     },
     label: {
         fontSize: 24,

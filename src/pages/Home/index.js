@@ -14,6 +14,7 @@ export default function Home({route}) {
       getUserById(userId)
         .then(user => {
           if (user) {
+            setUserId(user.id);
             setUserName(user.nome);
             setUserSobrenome(user.sobrenome);
             setUserEmail(user.email);
@@ -28,6 +29,7 @@ export default function Home({route}) {
     }
   }, [route.params]);
 
+  const [userId, setUserId] = useState('Usuário');
   const [userName, setUserName] = useState('Usuário');
   const [userSobrenome, setUserSobrenome] = useState('Sobrenome');
   const [userEmail, setUserEmail] = useState('Email');
@@ -38,7 +40,7 @@ export default function Home({route}) {
   return (
     <View style={styles.containerHome}>
       <View style={styles2.container}>
-        <Pressable style={styles2.conteudo} onPress={() => navigation.navigate('Perfil', {userName, userSobrenome, userEmail, userSenha})}>
+        <Pressable style={styles2.conteudo} onPress={() => navigation.navigate('Perfil', {userName, userSobrenome, userEmail, userSenha, userId})}>
           <View style={styles2.fotoPerfil}>
             <Image source={require('../../../assets/images/icons/user.png')} />
           </View>
