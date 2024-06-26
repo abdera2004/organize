@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 export default function Editarperfil({route}) {
 
   const navigation = useNavigation();
-  const { userName } = route.params;
+  const { userName, userSobrenome, userEmail, userSenha } = route.params;
 
   const [image, setImage] = useState(null);
 
@@ -51,7 +51,7 @@ export default function Editarperfil({route}) {
         <View style={styles.menuEditar}>
             <View style={{flex: 1}}>
               <Text style={styles.label}>Nome</Text>
-              <Text style={styles.tituloOpcao}>Ruan</Text>
+              <Text style={styles.tituloOpcao}>{userName}</Text>
             </View>
             <Pressable>
               <Image source={require('../../../assets/images/icons/lapis.png')} resizeMode='cover'/>
@@ -60,7 +60,7 @@ export default function Editarperfil({route}) {
         <View style={styles.menuEditar}>
             <View style={{flex: 1}}>
               <Text style={styles.label}>Sobrenome</Text>
-              <Text style={styles.tituloOpcao}>Santos</Text>
+              <Text style={styles.tituloOpcao}>{userSobrenome}</Text>
             </View>
             <Pressable>
               <Image source={require('../../../assets/images/icons/lapis.png')} resizeMode='cover'/>
@@ -69,7 +69,7 @@ export default function Editarperfil({route}) {
         <View style={styles.menuEditar}>
             <View style={{flex: 1}}>
               <Text style={styles.label}>E-mail</Text>
-              <Text style={styles.tituloOpcao}>ruan@gmail.com</Text>
+              <Text style={styles.tituloOpcao}>{userEmail}</Text>
             </View>
             <Pressable>
               <Image source={require('../../../assets/images/icons/lapis.png')} resizeMode='cover'/>
@@ -78,7 +78,7 @@ export default function Editarperfil({route}) {
         <View style={styles.menuEditar}>
             <View style={{flex: 1}}>
               <Text style={styles.label}>Senha</Text>
-              <Text style={styles.tituloOpcao}>oi123</Text>
+              <Text style={styles.tituloOpcao}>{userSenha}</Text>
             </View>
             <Pressable>
               <Image source={require('../../../assets/images/icons/lapis.png')} resizeMode='cover'/>

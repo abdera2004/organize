@@ -1,15 +1,13 @@
-import { View, Text, Pressable, Image } from "react-native";
+import { View, Text, Pressable, Image, StyleSheet, StatusBar } from "react-native";
 import styles from '../../../styles/styles';
-import Header from '../../../src/components/Header';
 import { ScrollView } from "react-native";
 import Navbar from "../../../src/components/Navbar";
 import {getUserById} from '../../database/database';
 import { useState, useEffect } from "react";
+import { useNavigation } from '@react-navigation/native';
 
 export default function Home({route}) {
 
-  const [userName, setUserName] = useState('Usuário');
-  
   useEffect(() => {
     if (route.params && route.params.userId) {
       const userId = route.params.userId;
@@ -17,6 +15,9 @@ export default function Home({route}) {
         .then(user => {
           if (user) {
             setUserName(user.nome);
+            setUserSobrenome(user.sobrenome);
+            setUserEmail(user.email);
+            setUserSenha(user.senha);
           } else {
             console.error('Usuário não encontrado');
           }
@@ -27,9 +28,26 @@ export default function Home({route}) {
     }
   }, [route.params]);
 
+  const [userName, setUserName] = useState('Usuário');
+  const [userSobrenome, setUserSobrenome] = useState('Sobrenome');
+  const [userEmail, setUserEmail] = useState('Email');
+  const [userSenha, setUserSenha] = useState('Senha');
+
+  const navigation = useNavigation();
+
   return (
     <View style={styles.containerHome}>
-        <Header nome={userName}/>
+      <View style={styles2.container}>
+        <Pressable style={styles2.conteudo} onPress={() => navigation.navigate('Perfil', {userName, userSobrenome, userEmail, userSenha})}>
+          <View style={styles2.fotoPerfil}>
+            <Image source={require('../../../assets/images/icons/user.png')} />
+          </View>
+          <Text style={styles2.texto}>Bom dia,{'\n'}{userName}</Text>
+          <View style={styles2.notificacao}>
+            <Image source={require('../../../assets/images/icons/sino.png')} />
+          </View>
+        </Pressable>
+      </View>
         <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.card}>
           <View style={[styles.primeiraMetadeCard, {borderBottomWidth: 1, borderBottomColor: 'white'}]}>
@@ -81,3 +99,44 @@ export default function Home({route}) {
     </View>
   );
 };
+
+const statusBarHeight = StatusBar.currentHeight ? StatusBar.currentHeight + 22 : 64;
+
+const styles2 = StyleSheet.create({
+  container: {
+    paddingTop: statusBarHeight,
+    flexDirection: 'row',
+    paddingHorizontal: 16,
+    width: '100%',
+    marginBottom: 40
+  },
+  texto: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+    paddingEnd: 70,
+    fontFamily: 'Inter_400Regular'
+  },
+  fotoPerfil: {
+    height: 80,
+    width: 80,
+    backgroundColor: 'white',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  conteudo: {
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  notificacao: {
+    width: 66,
+    height: 66,
+    backgroundColor: 'white',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});
